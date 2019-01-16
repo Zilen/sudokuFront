@@ -1,0 +1,24 @@
+<p>
+  sudoku works!
+</p>
+
+<div>
+  <table style="max-width:80%">
+    <tbody>
+      <tr *ngFor="let numberRow of numbers; let u = index">
+        <td *ngFor="let numberItem of numberRow; let i = index" [class]="bunda(i, u)">
+          <div class="div">
+            <input class="inputsudoku" [(ngModel)]="numbers[u][i].number" />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+  <button (click)="exibir()">
+    aaaaa
+  </button>
+  <button (click)="loadNumbers()">
+    reload
+  </button>
+</div>

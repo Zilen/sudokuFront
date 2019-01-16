@@ -1,0 +1,60 @@
+.direitaNormal {
+    border-right: solid 1PX;
+}
+
+
+.direitaForte {
+    border-right: solid 2PX;
+}
+
+.esquerdaForte {
+    border-left: solid 2PX;
+}
+
+.cimaForte {
+    border-top: solid 2PX;
+}
+
+
+.baixoForte {
+    border-bottom: solid 2PX;
+}
+
+.baixoNormal {
+    border-bottom: solid 1PX;
+}
+
+
+table {
+    border-collapse: collapse;
+    border: 1px solid red;
+    border-bottom: 0;
+}
+
+td, th {
+     border-right: 1px solid red;
+     border-bottom: 1px solid red;
+}
+td {
+    text-align: center;
+}
+
+div.div {
+    height: 20px;
+    width: 20px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.inputsudoku {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    box-shadow: none;
+    border:none;
+    max-height: 20px;
+    max-width: 20px;
+    text-align: center;
+    vertical-align: middle;
+}
