@@ -11,31 +11,24 @@ import { SudokuModel } from './Sudoku.model';
 export class SudokuComponent implements OnInit {
 
   public numbers: SudokuModel[][];
-  public numbersLoaded : boolean;
+  public numbersLoaded: boolean;
   sudokuComponent: SudokuModel;
 
 
-  constructor(private sudokuService : SudokuService) { }
+  constructor(private sudokuService: SudokuService) { }
 
   loadNumbers() {
-    this.numbersLoaded = false;
-    this.numbers = [];
-    for (let u = 0; u < 9; u++) {
-      this.numbers[u] = [];
-        for (let i = 1; i < 10; i++) {
-          this.numbers[u][i-1] = (new SudokuModel(null));
-        }
-      }
-     this.sudokuService.getNumbers().subscribe((response) => {
-      let numbers : SudokuModel[][];
+    this.limpar()
+    this.sudokuService.getNumbers().subscribe((response) => {
+      let numbers: SudokuModel[][];
       for (let u = 0; u < 9; u++) {
         this.numbers[u] = [];
-          for (let i = 1; i < 10; i++) {
-            this.numbers[u][i-1] = (new SudokuModel(response[u+i]));
-          }
+        for (let i = 0; i < 9; i++) {
+          this.numbers[u][i] = (new SudokuModel(response[(u*9) + i]));
+        }
       }
       this.numbersLoaded = true;
-  });
+    });
   }
 
   ngOnInit() {
@@ -63,11 +56,22 @@ export class SudokuComponent implements OnInit {
     return gatoCancer;
   }
 
-exibir() {
-  alert(this.numbers[0][0].number);
-}
+  exibir() {
+    alert(this.numbers[0][0].number);
+  }
 
-getNumbers() {
-  this.sudokuService.g
-}
+  limpar() {
+    this.numbersLoaded = false;
+    this.numbers = [];
+    for (let u = 0; u < 9; u++) {
+      this.numbers[u] = [];
+      for (let i = 1; i < 10; i++) {
+        this.numbers[u][i - 1] = (new SudokuModel(null));
+      }
+    }
+  }
+
+  getNumbers() {
+    this.sudokuService.g
+  }
 }

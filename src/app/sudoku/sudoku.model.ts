@@ -5,6 +5,6 @@ export class SudokuModel {
 
     constructor(number : number) { 
         this.number = number;
-        this.imutable = true;
+        this.imutable =number == null? false : true;
     }
 }

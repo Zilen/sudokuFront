@@ -8,15 +8,15 @@
       <tr *ngFor="let numberRow of numbers; let u = index">
         <td *ngFor="let numberItem of numberRow; let i = index" [class]="bunda(i, u)">
           <div class="div">
-            <input class="inputsudoku" [(ngModel)]="numbers[u][i].number" />
+            <input class="inputsudoku" [readonly]="numberItem.imutable" [(ngModel)]="numbers[u][i].number" />
           </div>
         </td>
       </tr>
     </tbody>
   </table>
   <br />
-  <button (click)="exibir()">
-    aaaaa
+  <button (click)="limpar()">
+    limpar
   </button>
   <button (click)="loadNumbers()">
     reload
