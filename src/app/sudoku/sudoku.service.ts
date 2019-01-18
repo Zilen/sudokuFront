@@ -6,9 +6,7 @@ import { Injectable } from '@angular/core';
 import { APIClient } from './../API/api.client';
 
 
-@Injectable({
-    providedIn:  'root'
-    })
+@Injectable()
 export class SudokuService {
     constructor(private httpClient: HttpClient, private apiCliente : APIClient) {  }
 

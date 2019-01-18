@@ -2,23 +2,31 @@
   sudoku works!
 </p>
 
-<div>
+<div class="container-fluid">
   <table style="max-width:80%">
     <tbody>
       <tr *ngFor="let numberRow of numbers; let u = index">
         <td *ngFor="let numberItem of numberRow; let i = index" [class]="bunda(i, u)">
-          <div class="div">
-            <input class="inputsudoku" [readonly]="numberItem.imutable" [(ngModel)]="numbers[u][i].number" />
+          <div [class]="(numberItem.colorir ? numberItem.cor : 'white') + ' div'">
+            <input class="inputsudoku" (click)="colorir(numberItem.number)" [readonly]="numberItem.imutable"
+              [(ngModel)]="numbers[u][i].number" (keypress)="numberOnly($event)" />
           </div>
         </td>
       </tr>
     </tbody>
   </table>
   <br />
-  <button (click)="limpar()">
-    limpar
-  </button>
-  <button (click)="loadNumbers()">
-    reload
-  </button>
+  <div class="col-md-3">
+    <button (click)="limpar()" class="btn btn-primary btn-sm">
+      limpar
+    </button>
+    <button (click)="loadNumbers()" class="btn btn-primary btn-sm">
+      reload
+    </button>
+    <select [(ngModel)]="dificuldade">
+      <option value=62 selected="true">facil</option>
+      <option value=36>medio</option>
+      <option value=18>cancer</option>
+    </select>
+  </div>
 </div>

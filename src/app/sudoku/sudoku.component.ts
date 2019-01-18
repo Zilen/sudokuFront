@@ -1,6 +1,7 @@
 import { SudokuService } from './sudoku.service';
 import { Component, OnInit } from '@angular/core';
 import { SudokuModel } from './Sudoku.model';
+import { isNumber } from 'util';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class SudokuComponent implements OnInit {
   public numbers: SudokuModel[][];
   public numbersLoaded: boolean;
   sudokuComponent: SudokuModel;
-
+  dificuldade : number = 62;
 
   constructor(private sudokuService: SudokuService) { }
 
@@ -24,7 +25,12 @@ export class SudokuComponent implements OnInit {
       for (let u = 0; u < 9; u++) {
         this.numbers[u] = [];
         for (let i = 0; i < 9; i++) {
-          this.numbers[u][i] = (new SudokuModel(response[(u*9) + i]));
+          if(this.getChance(this.dificuldade)) {
+            this.numbers[u][i] = (new SudokuModel(response[(u*9) + i], true));
+          } else {
+            this.numbers[u][i] = (new SudokuModel(null, false));
+          }
+          this.resetColor(this.numbers[u][i]);
         }
       }
       this.numbersLoaded = true;
@@ -33,11 +39,6 @@ export class SudokuComponent implements OnInit {
 
   ngOnInit() {
     this.loadNumbers();
-
-    console.log("ok!")
-    //    this.numbers = [[1,2,5,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-    //                  [1,2,5,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9],
-    //                 [1,2,5,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9], [1,2,3,4,5,6,7,8,9]];
   }
 
   bunda(index, indexLinha) {
@@ -51,8 +52,6 @@ export class SudokuComponent implements OnInit {
       gatoCancer += ' ' + 'cimaForte';
     }
 
-
-    console.log(gatoCancer);
     return gatoCancer;
   }
 
@@ -72,6 +71,57 @@ export class SudokuComponent implements OnInit {
   }
 
   getNumbers() {
-    this.sudokuService.g
+    //this.sudokuServiceg.
+  }
+
+  colorir(x) {
+    var y = parseInt(x);
+    this.numbers.forEach(value => {
+      value.forEach ( n => {
+        if (n.number != y) {
+          this.resetColor(n)
+        }
+       console.log(isNumber(n.number));
+        if (isNumber(y) && n.number == y) {
+          this.setBlue(n)
+        }
+      });
+    });
+  }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
+
+  setBlue(n) {
+    if ( n.cor == 'blue') {
+      this.resetColor(n)
+    } else {
+      n.cor = 'blue';
+      n.colorir = true;
+    }
+  } 
+
+  resetColor(n : SudokuModel) {
+    if (n.imutable) {
+      n.colorir = true;
+      n.cor = 'grey';
+    } else {
+      n.colorir = false;
+      n.cor = 'white';
+    }
+  }
+
+  getChance(chance) : boolean {
+    return (Math.floor(Math.random() * (100 - 1 + 1)) + 1) <= chance;
+}
+  setDifficulty(x) {
+    console.log(event)
+    event.target;
   }
 }
