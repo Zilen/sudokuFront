@@ -67,9 +67,25 @@ div.div {
 }
 
 .grey {
-    background-color : #afafaf; 
+    background-color : #f3f3f3; 
 }
 
 .white {
     background-color : #FFFFFF; 
+}
+
+.grey input {
+    font-weight: bold;
+    color: #818181;
+}
+
+.celula:hover {
+    border: #aaaaaa;
+    background-color:#a9aaaa;
+    font-weight: bold;
+}
+
+.celula:hover > div {
+    background-color:#d4ccea;
+    font-weight: bold;
 }

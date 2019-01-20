@@ -6,7 +6,7 @@
   <table style="max-width:80%">
     <tbody>
       <tr *ngFor="let numberRow of numbers; let u = index">
-        <td *ngFor="let numberItem of numberRow; let i = index" [class]="bunda(i, u)">
+        <td *ngFor="let numberItem of numberRow; let i = index" [class]="bunda(i, u)+'  celula'">
           <div [class]="(numberItem.colorir ? numberItem.cor : 'white') + ' div'">
             <input class="inputsudoku" (click)="colorir(numberItem.number)" [readonly]="numberItem.imutable"
               [(ngModel)]="numbers[u][i].number" (keypress)="numberOnly($event)" />
@@ -22,6 +22,9 @@
     </button>
     <button (click)="loadNumbers()" class="btn btn-primary btn-sm">
       reload
+    </button>
+    <button (click)="showAwnser()" class="btn btn-primary btn-sm">
+      mostrar resposta
     </button>
     <select [(ngModel)]="dificuldade">
       <option value=62 selected="true">facil</option>

@@ -12,6 +12,7 @@ import { isNumber } from 'util';
 export class SudokuComponent implements OnInit {
 
   public numbers: SudokuModel[][];
+  public completeNumbers: SudokuModel[][];
   public numbersLoaded: boolean;
   sudokuComponent: SudokuModel;
   dificuldade : number = 62;
@@ -21,16 +22,18 @@ export class SudokuComponent implements OnInit {
   loadNumbers() {
     this.limpar()
     this.sudokuService.getNumbers().subscribe((response) => {
-      let numbers: SudokuModel[][];
       for (let u = 0; u < 9; u++) {
         this.numbers[u] = [];
         for (let i = 0; i < 9; i++) {
           if(this.getChance(this.dificuldade)) {
             this.numbers[u][i] = (new SudokuModel(response[(u*9) + i], true));
+            this.completeNumbers[u][i] = (new SudokuModel(response[(u*9) + i], true));  
           } else {
             this.numbers[u][i] = (new SudokuModel(null, false));
+            this.completeNumbers[u][i] = (new SudokuModel(response[(u*9) + i], false));
           }
           this.resetColor(this.numbers[u][i]);
+          this.resetColor(this.completeNumbers[u][i]);
         }
       }
       this.numbersLoaded = true;
@@ -62,10 +65,13 @@ export class SudokuComponent implements OnInit {
   limpar() {
     this.numbersLoaded = false;
     this.numbers = [];
+    this.completeNumbers = [];
     for (let u = 0; u < 9; u++) {
       this.numbers[u] = [];
+      this.completeNumbers[u] = [];
       for (let i = 1; i < 10; i++) {
         this.numbers[u][i - 1] = (new SudokuModel(null));
+        this.completeNumbers[u][i - 1] = (new SudokuModel(null));
       }
     }
   }
@@ -123,5 +129,15 @@ export class SudokuComponent implements OnInit {
   setDifficulty(x) {
     console.log(event)
     event.target;
+  }
+
+  showAwnser() {
+    console.log(this.completeNumbers);
+    this.numbers = this.completeNumbers;
+    
+  }
+
+  hideAwnsers() {
+
   }
 }

@@ -8,7 +8,7 @@ export class APIClient {
     API_URL  =  'http://localhost:3000';
     constructor(private  httpClient:  HttpClient) {}
     get(url, object){
-        return  this.httpClient.get(`${this.API_URL}/${url}`, [], object);
+        return  this.httpClient.get(`${this.API_URL}/${url}`, undefined);
     }
     post(url, body){
         return  this.httpClient.post(`${this.API_URL}/${url}`, body);
